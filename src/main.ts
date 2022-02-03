@@ -8,6 +8,8 @@ async function bootstrap() {
   const nestOptions: NestApplicationOptions = {};
   nestOptions.cors = true;
   const app = await NestFactory.create(AppModule, nestOptions);
+  const httpAdapter: any = app.getHttpAdapter();
+  httpAdapter.set('etag', false);
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('To do list')
